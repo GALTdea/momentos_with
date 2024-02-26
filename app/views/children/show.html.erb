@@ -27,11 +27,10 @@
       <!-- Features Section -->
       <section class="py-12">
         <div class="container mx-auto">
-          <%#= form_with model: @entry, local: true, class: "space-y-4" do |form| %>
-          <%= form_with model: [@entry, @child], class: "space-y-4" do |form| %>
+          <%= form_with(model: [@child, @entry], local: true) do |form| %>
 
             <%= form.hidden_field :child_id, value: @child.id %>
-            <%= form.hidden_field :prompt_id, value: 1 %>
+            <%#= form.hidden_field :prompt_id, value: 1 %>
 
             <div class="flex flex-col">
               <%= form.label :response, class: "mb-2 text-sm font-medium text-gray-900" %>

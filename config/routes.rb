@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :children do
-    resources :entries
+    resources :entries, only: [:create]
   end
 
   resources :users do
