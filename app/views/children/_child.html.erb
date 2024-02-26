@@ -1,0 +1,37 @@
+<div id="<%= dom_id child %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= child.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= child.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= child.user_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Birthdate:</strong>
+    <%= child.birthdate %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Gender:</strong>
+    <%= child.gender %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Profile:</strong>
+    <%= child.profile %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this child", child, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this child", edit_child_path(child), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
