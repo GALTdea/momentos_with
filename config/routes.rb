@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :children
+  get 'entries/create'
+
   devise_for :users
+
+  resources :children do
+    resources :entries
+  end
 
   resources :users do
     resources :children
