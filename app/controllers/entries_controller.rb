@@ -13,6 +13,9 @@ class EntriesController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
   def set_child
     @child = Child.find(params[:child_id])
