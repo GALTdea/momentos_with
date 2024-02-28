@@ -25,7 +25,7 @@ class ChildrenController < ApplicationController
 
     respond_to do |format|
       if @child.save
-        @child.entries.create!(user_id: current_user.id, response: "I played outside and made a new friend.", conversation_date: Date.today, notes: "He was very excited about his new friend.")
+        @child.entries.create!(user_id: current_user.id, prompt_id: "1", response: "I played outside and made a new friend.", conversation_date: Date.today, notes: "He was very excited about his new friend.")
         format.html { redirect_to child_url(@child), notice: "Child was successfully created." }
         format.json { render :show, status: :created, location: @child }
       else
