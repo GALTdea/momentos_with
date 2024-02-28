@@ -8,6 +8,8 @@ class ChildrenController < ApplicationController
 
   # GET /children/1 or /children/1.json
   def show
+    # @entry_to_complete = @child.entries.where(user_id: current_user.id).where(response: nil).first
+    @entry_to_complete = @child.entries.first
   end
 
   # GET /children/new
