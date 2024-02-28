@@ -27,24 +27,22 @@
       <!-- Features Section -->
       <section class="py-12">
         <div class="container mx-auto">
-          <%= form_with(model: [@child, @entry], local: true) do |form| %>
+          <%= turbo_frame_tag "new_entry" do %>
+            <%= form_with model: [@child, Entry.new], target: "entries" do |form| %>
+              <%= form.hidden_field :child_id, value: @child.id %>
+              <%#= form.hidden_field :prompt_id, value: 1 %>
+              <div class="flex flex-col">
+                <%= form.label :response, class: "mb-2 text-sm font-medium text-gray-900" %>
+                <%= form.text_area :response, class: "form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+              </div>
 
-            <%= form.hidden_field :child_id, value: @child.id %>
-            <%#= form.hidden_field :prompt_id, value: 1 %>
-
-            <div class="flex flex-col">
-              <%= form.label :response, class: "mb-2 text-sm font-medium text-gray-900" %>
-              <%= form.text_area :response, class: "form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-            </div>
-
-            <div class="flex flex-col">
-              <%= form.label :notes, class: "mb-2 text-sm font-medium text-gray-900" %>
-              <%= form.text_area :notes, class: "form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-            </div>
-
-            <%= form.submit "Submit", class: "px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700" %>
+              <div class="flex flex-col">
+                <%= form.label :notes, class: "mb-2 text-sm font-medium text-gray-900" %>
+                <%= form.text_area :notes, class: "form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+              </div>
+              <%= form.submit "Submit", class: "px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700" %>
+            <% end %>
           <% end %>
-
         </div>
       </section>
 
@@ -54,26 +52,13 @@
           <div>
             <h2 class="text-3xl font-bold text-center">Entries </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 ">
-              <%# Entry.where(child_id: @child.id).each do |entry| %>
                 <div class="bg-white rounded-lg shadow-lg p-6">
                   <p class="text-gray-700 font-medium"><%#= entry.response %></p>
                   <p class="text-gray-500 mt-2"><%#= entry.notes %></p>
                 </div>
-              <%# end %>
-
-              <div id="entries">
-                <% Entry.where(child_id: @child.id).each do |entry| %>
-                  <!-- Wrap each entry in a div with a unique ID -->
-                  <div id="<%= dom_id(entry) %>" class="entry">
-                    <div class="bg-white rounded-lg shadow-lg p-6">
-                      <p class="text-gray-700 font-medium"><%= entry.response %></p>
-                      <p class="text-gray-500 mt-2"><%= entry.notes %></p>
-                    </div>
-                    <!-- Additional content or actions for each entry can go here -->
-                  </div>
+                <%= turbo_frame_tag "entries" do %>
+                  <%= render @child.entries %>
                 <% end %>
-              </div>
-                
           </div>
         </div>
       </section>
@@ -85,10 +70,6 @@
           <button class="mt-4 px-6 py-2 bg-green-500 text-white rounded">Sign Up Now</button>
         </div>
       </section>
-
     </div>
-
-
-
   </main>
 </div>
