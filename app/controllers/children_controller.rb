@@ -24,7 +24,7 @@ class ChildrenController < ApplicationController
   # POST /children or /children.json
   def create
     @child = Child.new(child_params)
-
+    @child.user_id = current_user.id
     respond_to do |format|
       if @child.save
         @child.entries.create!(user_id: current_user.id, prompt_id: "1", response: "I played outside and made a new friend.", conversation_date: Date.today, notes: "He was very excited about his new friend.")
