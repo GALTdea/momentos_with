@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :entries
 
   resources :children do
-    resources :entries, only: [:create, :destroy, :new, :show]
+    resources :entries, only: [:create, :destroy, :new, :show, :edit, :update]
   end
 
   resources :users do
