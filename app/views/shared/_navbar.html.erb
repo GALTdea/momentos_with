@@ -4,7 +4,17 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
-      <li><li> <%= link_to 'User', user_path(current_user) , class:'block px-4 py-2 text-sm text-gray-700' if user_signed_in? %></li></li>
+      <% if user_signed_in? %>
+        <li>
+          <%= link_to 'User', user_path(current_user) , class:'block px-4 py-2 text-sm text-gray-700'%>
+        </li>
+        <li>
+         
+          <%= link_to "Sign out", destroy_user_session_path, class:'block px-4 py-2 text-sm text-gray-700', data:{turbo_method: :delete} %>
+        </li>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path , class:'block px-4 py-2 text-sm text-gray-700'%>
+        <% end %>
       <li>
         <details>
           <summary>
