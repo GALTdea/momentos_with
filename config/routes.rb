@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  get 'entries/create'
 
   devise_for :users
 
+  resources :entries
+
   resources :children do
-    resources :entries, only: [:create, :destroy, :new, :show] # You can adjust the actions as needed
+    resources :entries, only: [:create, :destroy, :new, :show]
   end
 
   resources :users do
