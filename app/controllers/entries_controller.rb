@@ -8,7 +8,8 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.turbo_stream
+        format.html { redirect_to child_url(@child), notice: "Entry was successfully created." }
+        # format.turbo_stream
       end
     end
   end
