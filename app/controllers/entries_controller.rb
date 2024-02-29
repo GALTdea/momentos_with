@@ -1,7 +1,9 @@
 class EntriesController < ApplicationController
-  before_action :set_child
+  before_action :set_entry
 
   def create
+    @child = Child.find(params[:child_id])
+
     @entry = Entry.new(entry_params)
     @entry = @child.entries.build(entry_params)
     @entry.user_id = current_user.id
@@ -18,8 +20,8 @@ class EntriesController < ApplicationController
   end
 
   private
-  def set_child
-    @child = Child.find(params[:child_id])
+  def set_entry
+    @entry = Entry.find(params[:id])
   end
 
   def entry_params
