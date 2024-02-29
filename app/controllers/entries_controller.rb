@@ -19,6 +19,20 @@ class EntriesController < ApplicationController
   def show
   end
 
+  def edit
+    # @child = Child.find(params[:child_id])
+  end
+
+  def update
+    respond_to do |format|
+      if @entry.update(entry_params)
+        format.html { redirect_to child_url(@entry.child), notice: "Entry was successfully updated." }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
   def set_entry
     @entry = Entry.find(params[:id])
