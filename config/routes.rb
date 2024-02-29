@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :children do
-    resources :entries, only: [:create, :destroy, :new] # You can adjust the actions as needed
+    resources :entries, only: [:create, :destroy, :new, :show] # You can adjust the actions as needed
   end
 
   resources :users do
