@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @my_children = current_user.children
   end
 
   # GET /users/new
