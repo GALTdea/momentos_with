@@ -1,1 +1,12 @@
-<%= render 'form' %>
+ <div class="container mx-auto px-4">
+    <div class="pt-8">
+      <h1 class="text-2xl font-bold text-center text-gray-800"><%= @entry.prompt.question %></h1>
+    </div>
+    <div class="mt-4 p-5 bg-white rounded shadow">
+      <p class="text-gray-600"><%= @entry.response %></p>
+            <div class="flex justify-end space-x-4 mt-4">
+        <%= link_to 'Edit', edit_entry_path(@entry), class:'inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors' %>
+        <%= link_to 'Delete', entry_path(@entry), data: { turbo_method: :delete}  , class:'inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition-colors' %>
+      </div>
+    </div>
+  </div>
