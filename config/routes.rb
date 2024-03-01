@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  authenticated :user do
+    root 'users#show', as: :authenticated_root
+  end
+
+  root "users#index"
+
   resources :entries
 
   resources :children do
@@ -16,5 +22,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "users#index"
+
 end
