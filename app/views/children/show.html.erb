@@ -7,8 +7,10 @@
 <div class="min-h-full">
   <header class="bg-white shadow">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
-        <%= render @child %>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= @child.name %></h1>
+        <p class="my-5">
+          <%= @child.description %>
+        </p>
 
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <%= link_to "Edit this child", edit_child_path(@child), class: "ml-2 p-2 text-xs rounded-md bg-gray-100 inline-block font-medium" %>
