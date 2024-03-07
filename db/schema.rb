@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_212102) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_222202) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -97,6 +97,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_212102) do
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
   end
 
+  create_table "quiz_sessions", force: :cascade do |t|
+    t.integer "child_id", null: false
+    t.integer "quiz_id", null: false
+    t.string "score"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_quiz_sessions_on_child_id"
+    t.index ["quiz_id"], name: "index_quiz_sessions_on_quiz_id"
+  end
+
   create_table "quizzes", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -128,4 +139,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_212102) do
   add_foreign_key "entries", "prompts"
   add_foreign_key "entries", "users"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "quiz_sessions", "children"
+  add_foreign_key "quiz_sessions", "quizzes"
 end
