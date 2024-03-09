@@ -35,6 +35,9 @@ class QuizzesController < ApplicationController
   end
 
   def quiz_params
-    params.require(:quiz).permit(:title, :description)
+    params.require(:quiz).permit(
+      :title, :description,
+      questions_attributes: [ :id, :text, :question_type, :options, :category, :sequence_number, :active ]
+    )
   end
 end
