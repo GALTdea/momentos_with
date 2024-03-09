@@ -1,6 +1,6 @@
 <div>
   <h1 class="font-bold text-4xl">Quizzes#show</h1>
- <%= form_for @quiz do |f| %>
+ <%= form_with(model: @quiz, local: true) do |f| %>
     <div class="field">
       <%= f.label :title %> <br>
       <%= f.text_field :title %>
