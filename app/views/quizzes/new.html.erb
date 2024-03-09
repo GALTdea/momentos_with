@@ -1,4 +1,16 @@
 <div>
-  <h1 class="font-bold text-4xl">Quizzes#new</h1>
-  <p>Find me in app/views/quizzes/new.html.erb</p>
+  <h1 class="font-bold text-4xl">Quizzes#show</h1>
+ <%= form_for @quiz do |f| %>
+    <div class="field">
+      <%= f.label :title %> <br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :description %> <br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
 </div>
