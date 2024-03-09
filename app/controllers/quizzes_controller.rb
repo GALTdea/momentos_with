@@ -37,5 +37,4 @@ class QuizzesController < ApplicationController
   def quiz_params
     params.require(:quiz).permit(:title, :description)
   end
-
 end
