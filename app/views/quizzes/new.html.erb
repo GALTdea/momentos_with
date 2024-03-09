@@ -1,28 +1,27 @@
-<div>
-  <h1 class="font-bold text-4xl">Quizzes#show</h1>
- <%= form_with(model: @quiz, local: true) do |f| %>
-    <div class="field">
-      <%= f.label :title %> <br>
-      <%= f.text_field :title %>
-    </div>
-    <div class="field">
-      <%= f.label :description %> <br>
-      <%= f.text_area :description %>
-    </div>
-    
-    <h3>Questions</h3>
-    <%= f.fields_for :questions do |question_form| %>
-      <div class="field">
-        <%= question_form.label :text %>
-        <%= question_form.text_field :text %>
+<%= form_with(model: @quiz, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :title %> <br>
+    <%= form.text_field :title, id: :quiz_title %>
+  </div>
 
-        <%= question_form.hidden_field :_destroy %>
-        <%= link_to "Remove Question", '#', class: "remove_fields" %>
-      </div>
-    <% end %>
+  <div class="field">
+    <%= form.label :description %> <br>
+    <%= form.text_area :description, id: :quiz_description %>
+  </div>
 
-    <div class="actions">
-      <%= f.submit %>
+  <h3>Questions</h3>
+  <%= form.fields_for :questions do |question_form| %>
+    <div class="field">
+      <%= question_form.label :text %>
+      <%= question_form.text_field :text %>
+
+      <%= question_form.hidden_field :_destroy %>
+      <%= link_to "Remove Question", '#', class: "remove_fields" %>
     </div>
   <% end %>
-</div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
