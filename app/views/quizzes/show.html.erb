@@ -1,4 +1,23 @@
 <div>
-  <h1 class="font-bold text-4xl">Quizzes#show</h1>
-  <p>Find me in app/views/quizzes/show.html.erb</p>
+  <h1 class="text-3xl"> 
+    <p class="font-bold">Quiz Title: </p> <%= @quiz.title %> 
+  </h1>
+  
+  <h1 class="text-3xl">
+    <p class="font-bold">Description:</p><%= @quiz.description %>
+  </h2>
+
+
+  <h3>Questions</h3>
+
+<div id="questions" data-controller="nested-form">
+  <%= render @quiz.questions %>
+
+  <%= form_with(model: [@quiz, Question.new], data: { action: "submit->nested-form#addQuestion" }) do |form| %>
+    <div id="new-question-fields">
+      <%= form.label :text %>
+      <%= form.text_field :text %>
+    </div>
+    <%= form.submit "Add Question" %>
+  <% end %>
 </div>
