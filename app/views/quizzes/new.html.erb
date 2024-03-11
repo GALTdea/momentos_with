@@ -22,19 +22,7 @@
     <%= form.text_area :description, id: :quiz_description %>
   </div>
 
-  <h3>Questions</h3>
-  <%= form.fields_for :questions do |question_form| %>
-    <div class="field">
-      <%= question_form.label :text %>
-      <%= question_form.text_field :text %>
-
-      <%= question_form.hidden_field :_destroy %>
-      <%= link_to "Remove Question", '#', class: "remove_fields" %>
-    </div>
-  <% end %>
-
   <div class="actions">
     <%= form.submit %>
   </div>
-
 <% end %>
