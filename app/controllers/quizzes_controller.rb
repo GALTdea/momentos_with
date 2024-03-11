@@ -13,13 +13,11 @@ class QuizzesController < ApplicationController
 
   def create
     @quiz = Quiz.new(quiz_params)
-    respond_to do |format|
       if @quiz.save
-        redirect_to @quiz
+        redirect_to @quiz, notice: 'Quiz was successfully created.'
       else
         render :new
       end
-    end
   end
 
   def edit
@@ -35,9 +33,6 @@ class QuizzesController < ApplicationController
   end
 
   def quiz_params
-    params.require(:quiz).permit(
-      :title, :description,
-      questions_attributes: [ :id, :text, :question_type, :options, :category, :sequence_number, :active ]
-    )
+    params.require(:quiz).permit(:title, :description, :total_questions, :active, :category)
   end
 end
