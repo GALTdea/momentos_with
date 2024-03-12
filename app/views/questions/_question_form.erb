@@ -1,0 +1,10 @@
+<%= form_with model: [quiz, quiz.questions.build], target: "questions_list", class: "space-y-6" do |form| %>
+  <div>
+    <%= form.label :text, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.rich_text_area :text, class: "input input-bordered w-full", placeholder: "Enter question text here" %>
+  </div>
+
+  <div>
+    <%= form.submit "Add Question", class: "btn btn-primary" %>
+  </div>
+<% end %>
