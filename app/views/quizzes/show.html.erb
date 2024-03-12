@@ -1,23 +1,13 @@
+<h1><%= @quiz.title %></h1>
+
+<div id="questions">
+  <%= turbo_frame_tag "questions_list" do %>
+    <%= render @quiz.questions %>
+  <% end %>
+</div>
+
 <div>
-  <h1 class="text-3xl"> 
-    <p class="font-bold">Quiz Title: </p> <%= @quiz.title %> 
-  </h1>
-  
-  <h1 class="text-3xl">
-    <p class="font-bold">Description:</p><%= @quiz.description %>
-  </h2>
-
-
-  <h3>Questions</h3>
-
-<div id="questions" data-controller="nested-form">
-  <%= render @quiz.questions %>
-
-  <%= form_with(model: [@quiz, Question.new], data: { action: "submit->nested-form#addQuestion" }) do |form| %>
-    <div id="new-question-fields">
-      <%= form.label :text %>
-      <%= form.text_field :text %>
-    </div>
-    <%= form.submit "Add Question" %>
+  <%= turbo_frame_tag "new_question" do %>
+    <%= render "questions/form", quiz: @quiz %>
   <% end %>
 </div>
