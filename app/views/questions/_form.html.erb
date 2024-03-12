@@ -1,0 +1,10 @@
+<%= form_with model: [quiz, quiz.questions.build], target: "questions_list" do |form| %>
+  <div>
+    <%= form.label :text %>
+    <%= form.text_field :text %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
