@@ -9,7 +9,8 @@
           <%= link_to 'User', user_path(current_user) , class:'block px-4 py-2 text-sm text-gray-700'%>
         </li>
         <li>
-         
+          <%= link_to 'New Quiz', new_quiz_path , class:'block px-4 py-2 text-sm text-gray-700'%>
+        <li>
           <%= link_to "Sign out", destroy_user_session_path, class:'block px-4 py-2 text-sm text-gray-700', data:{turbo_method: :delete} %>
         </li>
         <% else %>
