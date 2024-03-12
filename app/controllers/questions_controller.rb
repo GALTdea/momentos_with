@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: %i[show edit update destroy]
   def index
   end
 
@@ -30,5 +31,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:text, :quiz_id, :_destroy, answers_attributes: [:id, :text, :correct, :_destroy])
+  end
+
+  def set_question
+    @question = Question.find(params[:id])
   end
 end
