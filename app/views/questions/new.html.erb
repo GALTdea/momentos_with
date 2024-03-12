@@ -1,4 +1,46 @@
-<div>
-  <h1 class="font-bold text-4xl">Questions#new</h1>
-  <p>Find me in app/views/questions/new.html.erb</p>
-</div>
+<%= form_with model: @question, local: true, class: "max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8" do |form| %>
+  <div class="bg-white shadow rounded-lg p-8 space-y-6">
+    <h2 class="text-2xl font-bold text-gray-900">Question Form</h2>
+
+    <!-- Question Text -->
+    <div>
+      <%= form.label :text, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.rich_text_area :text, rows: 3, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+
+    <!-- Question Type -->
+    <div>
+      <%= form.label :question_type, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.select :question_type, ['Multiple Choice', 'True/False', 'Short Answer'], {}, {class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"} %>
+    </div>
+
+    <!-- Options (for multiple-choice questions) -->
+    <div>
+      <%= form.label :options, "Options (comma-separated)", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :options, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+
+    <!-- Category -->
+    <div>
+      <%= form.label :category, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :category, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+
+    <!-- Sequence Number -->
+    <div>
+      <%= form.label :sequence_number, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.number_field :sequence_number, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    </div>
+
+    <!-- Active Status -->
+    <div>
+      <%= form.label :active, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.select :active, [['Yes', true], ['No', false]], {}, {class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"} %>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <%= form.submit "Save Question", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
