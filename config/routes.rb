@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  get 'questions/index'
-  get 'questions/show'
-  get 'questions/new'
-  get 'questions/edit'
-
+  resources :questions
 
   resources :quizzes do
     resources :questions
