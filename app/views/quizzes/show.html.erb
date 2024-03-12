@@ -1,13 +1,18 @@
-<h1><%= @quiz.title %></h1>
+<div class="max-w-4xl mx-auto py-10">
+  <h1 class="text-3xl font-bold mb-2"><%= @quiz.title %></h1>
+  <h2 class="text-xl text-gray-600 mb-6"><%= @quiz.description %></h2>
 
-<div id="questions">
-  <%= turbo_frame_tag "questions_list" do %>
-    <%= render @quiz.questions %>
-  <% end %>
-</div>
+  <div id="questions" class="mb-8">
+    <%= turbo_frame_tag "questions_list" do %>
+      <div class="space-y-4">
+        <%= render @quiz.questions %>
+      </div>
+    <% end %>
+  </div>
 
-<div>
-  <%= turbo_frame_tag "new_question" do %>
-    <%= render "questions/form", quiz: @quiz %>
-  <% end %>
+  <div class="p-6 bg-white shadow-md rounded-lg">
+    <%= turbo_frame_tag "new_question" do %>
+      <%= render "questions/form", quiz: @quiz %>
+    <% end %>
+  </div>
 </div>
