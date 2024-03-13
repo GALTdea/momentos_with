@@ -1,4 +1,3 @@
-<%#= form_with model: question, local: true, class: "max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8" do |form| %>
 <%= form_with model: question, data: { turbo: false }, class: "max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8" do |form| %>
   <div class="bg-white shadow rounded-lg p-8 space-y-6">
     <h2 class="text-2xl font-bold text-gray-900"><%= question.new_record? ? 'New Question' : 'Edit Question' %></h2>
@@ -6,7 +5,7 @@
       <%= form.label :text, class: "block text-sm font-medium text-gray-700" %>
       <%= form.rich_text_area :text, rows: 3, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
     </div>
-
+    <%= form.hidden_field :quiz_id, value: @question.quiz_id || 1 %>
     <div class="flex justify-end">
       <%= form.submit question.new_record? ? 'Create Question' : 'Update Question', class: "btn btn-primary" %>
     </div>
