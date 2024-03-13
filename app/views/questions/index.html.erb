@@ -8,7 +8,7 @@
           <th style="width: 20px;"></th> 
           <th style="width: 150px;">Question</th> 
           <th style="width: 50px;">Quiz</th>
-          <th style="width: 50px;">Active?</th>
+          <th style="width: 50px;">Status</th>
           <th style="width: 50px;">Question Type</th> 
           <th style="width: 50px;">Options</th> 
           <th style="width: 50px;">Category</th> 
@@ -21,7 +21,11 @@
             <th>1</th> 
             <td><%= link_to q.text, question_path(q) %></td></td> 
             <td><%= q.quiz.title %></td> 
-            <td>Active</td> 
+            <td>
+        <%= button_to toggle_status_question_path(q), method: :patch, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" do %>
+          <%= q.status.capitalize %>
+        <% end %>
+            </td>
             <td>Canada</td> 
             <td>12/16/2020</td> 
             <td>Blue</td>
