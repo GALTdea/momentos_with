@@ -1,4 +1,44 @@
 <div>
-  <h1 class="font-bold text-4xl">Questions#index</h1>
-  <p>Find me in app/views/questions/index.html.erb</p>
+  <h1 class="font-bold text-4xl">Questions</h1>
+ 
+  <div class="overflow-x-auto">
+    <table class="table table-xs">
+      <thead>
+        <tr>
+          <th style="width: 20px;"></th> 
+          <th style="width: 150px;">Question</th> 
+          <th style="width: 50px;">Quiz</th>
+          <th style="width: 50px;">Active?</th>
+          <th style="width: 50px;">Question Type</th> 
+          <th style="width: 50px;">Options</th> 
+          <th style="width: 50px;">Category</th> 
+          <th style="width: 30px;">Favorite Color</th>
+        </tr>
+      </thead> 
+      <tbody>
+        <% @questions.each do |q| %>
+          <tr>
+            <th>1</th> 
+            <td><%= q.text %></td> 
+            <td><%= q.quiz.title %></td> 
+            <td>Active</td> 
+            <td>Canada</td> 
+            <td>12/16/2020</td> 
+            <td>Blue</td>
+          </tr>
+        <% end %>
+      </tbody> 
+      <tfoot>
+        <tr>
+          <th></th> 
+          <th>Name</th> 
+          <th>Job</th> 
+          <th>company</th> 
+          <th>location</th> 
+          <th>Last Login</th> 
+          <th>Favorite Color</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
