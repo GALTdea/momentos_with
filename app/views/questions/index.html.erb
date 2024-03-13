@@ -19,7 +19,7 @@
         <% @questions.each do |q| %>
           <tr>
             <th>1</th> 
-            <td><%= q.text %></td> 
+            <td><%= link_to q.text, question_path(q) %></td></td> 
             <td><%= q.quiz.title %></td> 
             <td>Active</td> 
             <td>Canada</td> 
