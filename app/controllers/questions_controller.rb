@@ -34,7 +34,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-
   def edit
   end
 
@@ -42,6 +41,14 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def toggle_status
+    @question = Question.find(params[:id])
+    new_status = @question.status == "active" ? "inactive" : "active"
+    @question.update(status: new_status)
+
+    redirect_back(fallback_location: questions_path)
   end
 
   private
