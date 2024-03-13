@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :questions
+  resources :questions do
+    member do
+      patch :toggle_status
+    end
+  end
 
   resources :quizzes do
     resources :questions
