@@ -41,6 +41,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    @question.destroy
+    redirect_to questions_path, notice: 'Question was successfully destroyed.'
   end
 
   def toggle_status

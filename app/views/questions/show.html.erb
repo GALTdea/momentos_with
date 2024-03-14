@@ -37,6 +37,9 @@
   <!-- Action buttons -->
   <div class="mt-5 flex justify-end">
     <a href="#" class="btn btn-secondary">Edit Question</a>
-    <a href="#" class="btn btn-danger ml-3">Delete Question</a>
+    <%= link_to 'Delete Question', question_path(@question) , class:'btn btn-danger ml-3' %>
+    <%#= link_to 'Destroy', question_path(@question), method: :delete, data: { confirm: 'Are you sure?', turbo: "false" }, class: "btn btn-danger" %>
+
+   
   </div>
 </div>
