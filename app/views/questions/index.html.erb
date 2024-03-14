@@ -20,7 +20,10 @@
           <tr>
             <th>1</th> 
             <td><%= link_to q.text, question_path(q) %></td></td> 
-            <td><%= q.quiz.title %></td> 
+            <td><%= q.quiz.title %></td>
+            <td><%= link_to "Delete", question_path(q), data: { turbo_method: :delete}  %></td>
+              <%#%= link_to 'Delete', entry_path(@entry), data: { turbo_method: :delete}  , class:'inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition-colors' %>
+
             <td>
         <%= button_to toggle_status_question_path(q), method: :patch, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" do %>
           <%= q.status.capitalize %>
