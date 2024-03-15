@@ -30,12 +30,7 @@
             <td>12/16/2020</td> 
             <td>Blue</td>
             <td>
-              <%= link_to "Delete", question_path(q), data: { turbo_method: :delete}  %>
-              <%#= link_to 'Destroy', question_path(q), method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-              <%#% link_to 'Destroy', question_path(q), method: :delete, data: { confirm: 'Are you sure?', 'turbo-method': :delete }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-                
-
-
+              <%= link_to "Delete", question_path(q), data: { turbo_method: :delete}, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  %>
             </td>
           </tr>
         <% end %>
