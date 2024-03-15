@@ -42,7 +42,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    redirect_to questions_url, notice: "Question was successfully destroyed."
+    redirect_to questions_url, notice: 'Question was successfully destroyed.'
   end
 
   def toggle_status
