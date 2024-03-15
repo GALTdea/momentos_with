@@ -2,6 +2,7 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update]
 
   def index
+    @quizzes = Quiz.all
   end
 
   def show

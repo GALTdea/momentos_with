@@ -1,4 +1,30 @@
 <div>
-  <h1 class="font-bold text-4xl">Quizzes#index</h1>
-  <p>Find me in app/views/quizzes/index.html.erb</p>
+  <h1 class="font-bold text-4xl">Questions</h1>
+ 
+  <div class="overflow-x-auto">
+    <table class="table table-xs">
+      <thead>
+        <tr>
+          <th style="width: 20px;"></th> 
+          <th style="width: 250px;">Title</th> 
+          <th style="width: 30px;">Status</th>
+          <th style="width: 350px;">Description</th>
+          <th style="width: 30px;">Action</th>
+        </tr>
+      </thead> 
+      <tbody>
+        <% @quizzes.each do |q| %>
+          <tr>
+            <th>1</th> 
+            <td><%= link_to q.title, quiz_path(q) %></td></td> 
+            <td><%= q.active? %></td>
+            <td><%= q.description %></td> 
+            <td>
+              <%= link_to "Delete", question_path(q), data: { turbo_method: :delete}, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody> 
+    </table>
+  </div>
 </div>
