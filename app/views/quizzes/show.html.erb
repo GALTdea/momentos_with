@@ -2,7 +2,10 @@
   <div class="mb-10">
     <h1 class="text-4xl font-extrabold text-gray-900 mb-1"><%= @quiz.title %></h1>
     <p class="text-lg text-gray-500"><%= @quiz.description %></p>
-  </div>
+  </div> 
+  <div> 
+    <%= link_to 'Start Quiz', new_quiz_quiz_session_path(quiz_id: @quiz.id) %>
+  </div> <br>
 
   <div id="questions" class="mb-8">
     <%= turbo_frame_tag "questions_list" do %>
