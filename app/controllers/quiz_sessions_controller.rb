@@ -11,7 +11,8 @@ class QuizSessionsController < ApplicationController
     @quiz_session = QuizSession.new(quiz_session_params)
     @quiz_session.quiz_id = @quiz.id
     if @quiz_session.save
-      redirect_to questions_path, notice: "Question Session created successfully."
+      # Redirect to the 'start' action for the newly created quiz_session
+      redirect_to start_quiz_session_path(@quiz_session), notice: "Quiz session created successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,6 +23,13 @@ class QuizSessionsController < ApplicationController
   end
 
   def update
+  end
+
+  def start
+    @quiz_session = QuizSession.find(params[:id])
+    @quiz_session.start!
+    redirect_to @quiz_session
+
   end
 
 
