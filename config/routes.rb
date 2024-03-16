@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :quiz_sessions
   resources :questions do
     member do
       patch :toggle_status
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :quizzes do
     resources :questions
+    resources :quiz_sessions
   end
 
   devise_for :users
