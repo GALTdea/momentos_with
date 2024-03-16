@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :quiz_sessions
+  resources :quiz_sessions do
+    member do
+      get 'start'
+    end
+  end
+
   resources :questions do
     member do
       patch :toggle_status
