@@ -3,7 +3,10 @@ Rails.application.routes.draw do
     member do
       get 'start'
     end
+    resources :answers, only: [:create]
   end
+
+
 
   resources :questions do
     member do
