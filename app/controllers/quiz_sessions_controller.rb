@@ -27,13 +27,37 @@ class QuizSessionsController < ApplicationController
 
   def start
     @quiz_session = QuizSession.find(params[:id])
-    @quiz_session.start!
-    redirect_to @quiz_session
+    last_question_id = @quiz_session.answers.last&.question_id
 
+    if last_question_id
+      next_question = find_next_question(Question.find(last_question_id))
+    else
+      next_question = @quiz_session.quiz.questions.first
+    end
+
+    # Use @question to match the view's expectation
+    @question = next_question
+
+    if @question
+      render 'questions/show' # Render the question view
+    else
+      @quiz_session.update(status: 'completed') # Update quiz session status if needed
+      redirect_to quiz_session_path(@quiz_session), notice: 'Quiz completed!'
+    end
   end
 
 
+
 private
+
+def find_next_question(current_question)
+  quiz = current_question.quiz
+  questions = quiz.questions.order(:id).to_a
+  current_index = questions.index(current_question)
+  questions[current_index + 1]
+end
+
+
 
   def set_quiz
     @quiz = Quiz.find(params[:quiz_id])
