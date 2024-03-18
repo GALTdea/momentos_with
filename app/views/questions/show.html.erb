@@ -10,29 +10,40 @@
           <dt class="text-sm font-medium text-gray-500">Question</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @question.text %></dd>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Type</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @question.question_type %></dd>
-        </div>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Options</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @question.options %></dd>
-        </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Category</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @question.category %></dd>
-        </div>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Sequence Number</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @question.sequence_number %></dd>
-        </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Status</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @question.status %></dd>
+
+        <!-- Options Form -->
+        <div class="bg-white px-4 py-5 sm:p-6">
+          <form action="<%= submit_answer_path %>" method="post">
+            <!-- Rails form authenticity token -->
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+            <fieldset>
+              <legend class="text-sm font-medium text-gray-700">Options</legend>
+              <div class="mt-4 space-y-4">
+                <% @question.options.each_with_index do |option, index| %>
+                  <div class="flex items-center">
+                    <input id="option_<%= index %>" name="answer[option]" type="radio" value="<%= option %>" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                    <label for="option_<%= index %>" class="ml-3 block text-sm font-medium text-gray-700">
+                      <%= option %>
+                    </label>
+                  </div>
+                <% end %>
+              </div>
+            </fieldset>
+
+            <!-- Hidden field to pass the question id -->
+            <%= hidden_field_tag 'answer[question_id]', @question.id %>
+
+            <div class="mt-5">
+              <button type="submit" class="btn btn-primary">Submit Answer</button>
+            </div>
+          </form>
         </div>
       </dl>
     </div>
   </div>
+</div>
+
 
   <!-- Action buttons -->
   <div class="mt-5 flex justify-end">
@@ -40,3 +51,27 @@
     <%= link_to 'Delete Question', question_path(@question), data: { turbo_method: :delete} , class:'btn btn-danger ml-3' %>
   </div>
 </div>
+
+<br>
+
+<%= form_with model: [@quiz_session, Answer.new], url: quiz_session_answers_path(@quiz_session), method: :post, local: true do |form| %>
+  <fieldset class="mb-4">
+    <legend class="text-lg font-semibold"><%= @question.text %></legend>
+    
+    <% @question.options.each_with_index do |option, index| %>
+      <div class="mt-2">
+        <%= form.radio_button :selected_option, option, id: "option_#{index}" %>
+        <%= form.label :selected_option, option, value: option, for: "option_#{index}" %>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <%= form.hidden_field :question_id, value: @question.id %>
+
+  <div>
+    <%= form.submit "Submit Answer", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+
+<%= console %>
