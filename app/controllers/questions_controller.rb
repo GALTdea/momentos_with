@@ -38,6 +38,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    @question.update(question_params)
+    redirect_to @question, notice: 'Question was successfully updated.'
   end
 
   def destroy
