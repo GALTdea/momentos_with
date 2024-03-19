@@ -10,34 +10,25 @@
           <dt class="text-sm font-medium text-gray-500">Question</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @question.text %></dd>
         </div>
-
         <!-- Options Form -->
         <div class="bg-white px-4 py-5 sm:p-6">
-          <form action="<%= submit_answer_path %>" method="post">
-            <!-- Rails form authenticity token -->
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
+          <%= form_with model: Answer.new, url: answers_path, local: true do |form| %>
             <fieldset>
               <legend class="text-sm font-medium text-gray-700">Options</legend>
               <div class="mt-4 space-y-4">
                 <% @question.options.each_with_index do |option, index| %>
                   <div class="flex items-center">
-                    <input id="option_<%= index %>" name="answer[option]" type="radio" value="<%= option %>" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                    <label for="option_<%= index %>" class="ml-3 block text-sm font-medium text-gray-700">
-                      <%= option %>
-                    </label>
+                    <%= form.radio_button :selected_option, option, id: "option_#{index}", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" %>
+                    <%= form.label :selected_option, option, value: option, class: "ml-3 block text-sm font-medium text-gray-700", for: "option_#{index}" %>
                   </div>
                 <% end %>
               </div>
             </fieldset>
 
-            <!-- Hidden field to pass the question id -->
-            <%= hidden_field_tag 'answer[question_id]', @question.id %>
-
-            <div class="mt-5">
-              <button type="submit" class="btn btn-primary">Submit Answer</button>
-            </div>
-          </form>
+            <%= form.hidden_field :question_id, value: @question.id %>
+            <%= form.hidden_field :quiz_session_id, value: @quiz_session.id  %>
+            <%= form.submit "Submit", class: "btn btn-primary mt-4" %>
+          <% end %>
         </div>
       </dl>
     </div>
@@ -53,25 +44,5 @@
 </div>
 
 <br>
-
-<%= form_with model: [@quiz_session, Answer.new], url: quiz_session_answers_path(@quiz_session), method: :post, local: true do |form| %>
-  <fieldset class="mb-4">
-    <legend class="text-lg font-semibold"><%= @question.text %></legend>
-    
-    <% @question.options.each_with_index do |option, index| %>
-      <div class="mt-2">
-        <%= form.radio_button :selected_option, option, id: "option_#{index}" %>
-        <%= form.label :selected_option, option, value: option, for: "option_#{index}" %>
-      </div>
-    <% end %>
-  </fieldset>
-
-  <%= form.hidden_field :question_id, value: @question.id %>
-
-  <div>
-    <%= form.submit "Submit Answer", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
 
 <%= console %>
