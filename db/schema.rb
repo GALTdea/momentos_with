@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_18_233112) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_181811) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -108,6 +108,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_233112) do
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
   end
 
+  create_table "quiz_questions", force: :cascade do |t|
+    t.integer "quiz_id", null: false
+    t.integer "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_quiz_questions_on_question_id"
+    t.index ["quiz_id"], name: "index_quiz_questions_on_quiz_id"
+  end
+
   create_table "quiz_sessions", force: :cascade do |t|
     t.integer "child_id", null: false
     t.integer "quiz_id", null: false
@@ -152,6 +161,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_233112) do
   add_foreign_key "entries", "prompts"
   add_foreign_key "entries", "users"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "quiz_questions", "questions"
+  add_foreign_key "quiz_questions", "quizzes"
   add_foreign_key "quiz_sessions", "children"
   add_foreign_key "quiz_sessions", "quizzes"
 end
