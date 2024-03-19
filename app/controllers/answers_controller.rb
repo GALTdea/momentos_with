@@ -1,20 +1,30 @@
 class AnswersController < ApplicationController
 
   def create
-    @quiz_session = QuizSession.find(params[:quiz_session_id])
-    @answer = @quiz_session.answers.build(answer_params)
+    @answer = Answer.new(answer_params)
+    @answer.question_id = params[:answer][:question_id]
+    @answer.quiz_session_id = params[:answer][:quiz_session_id]
 
     if @answer.save
-      # Redirect to the next question, show a success message, etc.
+      next_question = @answer.quiz_session.next_question
+
+      if next_question
+        # Redirect to the next question's show page
+        redirect_to question_path(next_question), notice: 'Your answer was successfully recorded.'
+      else
+        # Handle end of quiz, e.g., show results or a completion message
+        redirect_to quiz_completion_path(@answer.quiz_session), notice: 'Quiz completed!'
+      end
     else
-      # Handle the error, perhaps re-rendering the question page with an error message.
+      # Handle the error, perhaps by rendering the current question again with an error message
+      render 'questions/show', status: :unprocessable_entity
     end
   end
 
   private
 
   def answer_params
-    params.require(:answer).permit(:selected_option, :question_id)
+    params.require(:answer).permit(:options, :question_id, :quiz_session_id, :text, :user_id, :selected_option)
+    # Ensure these parameters match what your form is sending
   end
-
 end
