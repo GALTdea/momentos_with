@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :quiz_sessions do
     member do
       get 'start'
@@ -6,7 +7,7 @@ Rails.application.routes.draw do
     resources :answers, only: [:create]
   end
 
-
+  resources :answers, only: [:create]
 
   resources :questions do
     member do
