@@ -1,1 +1,40 @@
-<%= render 'form', quiz: @quiz %>
+<div class="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+  <div class="mb-10">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-1"><%= @quiz.title %></h1>
+    <p class="text-lg text-gray-500"><%= @quiz.description %></p>
+  </div> 
+  <div> 
+    <%= link_to 'Start Quiz', new_quiz_quiz_session_path(quiz_id: @quiz.id) %>
+  </div> <br>
+
+  <div id="questions" class="mb-8">
+    <%= turbo_frame_tag "questions_list" do %>
+      <div class="divide-y divide-gray-200">
+        <%= render @quiz.questions %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-10 bg-white p-6 shadow-lg rounded-lg">
+    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Add a new question</h3>
+
+    <div class="mt-10 bg-white p-6 shadow-lg rounded-lg">
+      <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Add Existing Questions to Quiz</h3>
+      <%= turbo_frame_tag "add_questions" do %>
+        <%= form_with url: add_questions_quiz_path(@quiz), method: :post, data: { turbo_frame: "add_questions" } do |form| %>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <% Question.all.each do |question| %>
+              <div class="flex items-center">
+                <%= check_box_tag "quiz[question_ids][]", question.id, @quiz.questions.include?(question), id: dom_id(question) %>
+                <%= label_tag dom_id(question), question.text.to_plain_text.truncate(50), class: "ml-2 block text-sm font-medium text-gray-700" %>
+
+              </div>
+            <% end %>
+          </div>
+          <%= form.submit "Add Selected Questions", class: "btn btn-primary mt-4" %>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
