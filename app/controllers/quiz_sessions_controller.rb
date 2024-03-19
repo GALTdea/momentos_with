@@ -50,13 +50,12 @@ class QuizSessionsController < ApplicationController
 
 private
 
-def find_next_question(current_question)
-  quiz = current_question.quiz
-  questions = quiz.questions.order(:id).to_a
-  current_index = questions.index(current_question)
-  questions[current_index + 1]
-end
-
+  def find_next_question(current_question)
+    quiz = current_question.quiz
+    questions = quiz.questions.order(:id).to_a
+    current_index = questions.index(current_question)
+    questions[current_index + 1]
+  end
 
 
   def set_quiz
