@@ -1,0 +1,23 @@
+<!-- Start of the form -->
+<%= form_with model: quiz, local: true do |form| %>
+
+  <!-- Quiz title and description -->
+  <div class="mb-10">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-1"><%= quiz.title %></h1>
+    <p class="text-lg text-gray-500"><%= quiz.description %></p>
+  </div>
+
+  <!-- Questions listing -->
+  <div id="questions" class="mb-8">
+    <%= turbo_frame_tag "questions_list" do %>
+      <div class="divide-y divide-gray-200">
+        <%= render quiz.questions %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Form fields for adding new or existing questions -->
+  <!-- Your form fields go here -->
+
+<% end %>
+<!-- End of the form -->
