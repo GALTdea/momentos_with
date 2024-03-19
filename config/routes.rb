@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :quizzes do
     resources :questions
     resources :quiz_sessions
+    member do
+      post :add_questions
+    end
   end
 
   devise_for :users
