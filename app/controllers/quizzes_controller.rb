@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show, :edit, :update]
+  before_action :set_quiz, only: [:show, :edit, :update, :destroy]
 
   def index
     @quizzes = Quiz.all
@@ -25,6 +25,11 @@ class QuizzesController < ApplicationController
   end
 
   def update
+  end
+
+  def destroy
+    @quiz.destroy
+    redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.'
   end
 
   private
