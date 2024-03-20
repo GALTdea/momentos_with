@@ -1,15 +1,15 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
 
   def index
+    @quizzes = policy_scope(Quiz)
+
     if current_user && current_user.admin?
-      @quizzes = Quiz.all
       render 'index'
     else
-      @quizzes = Quiz.active
       render 'user_index'
     end
-
   end
 
   def show
