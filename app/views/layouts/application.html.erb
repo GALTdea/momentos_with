@@ -16,7 +16,7 @@
     <span class=""><%= alert %></span>
 
     <main class="container mx-auto px-5">
-      <% if user_signed_in? %>
+      <% if user_signed_in? && current_user.admin? %>
         <%= render 'shared/admin_navbar' %>
       <% else %>
         <%= render 'shared/navbar' %>
