@@ -2,7 +2,14 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
 
   def index
-    @quizzes = Quiz.all
+    if current_user.admin?
+      @quizzes = Quiz.all
+      render 'index'
+    else
+      @quizzes = Quiz.where(active: true)
+      render 'user_index'
+    end
+
   end
 
   def show
