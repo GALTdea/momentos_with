@@ -26,10 +26,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticated :user do
-    root 'users#show', as: :authenticated_root
+    root 'quizzes#index', as: :authenticated_root
   end
 
-  root "users#index"
+  root "quizzes#index"
 
   resources :entries
 
