@@ -33,7 +33,13 @@
           </summary>
           <ul class="p-2 bg-base-100 rounded-t-none">
             <li> <%= link_to 'User', user_path(current_user) , class:'block px-4 py-2 text-sm text-gray-700' if user_signed_in? %></li>
-            <li><a>Link 2</a></li>
+            <li>
+              <% if user_signed_in? %>
+                <%= link_to "Log out", destroy_user_session_path, class:'block px-4 py-2 text-sm text-gray-700', data:{turbo_method: :delete} %>
+              <% else %>
+                <%= link_to 'Log in', new_user_session_path , class:'block px-4 py-2 text-sm text-gray-700'%>
+              <% end %>
+            </li>
           </ul>
         </details>
       </li>
