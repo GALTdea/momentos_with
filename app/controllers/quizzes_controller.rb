@@ -6,7 +6,7 @@ class QuizzesController < ApplicationController
       @quizzes = Quiz.all
       render 'index'
     else
-      @quizzes = Quiz.where(active: true)
+      @quizzes = Quiz.active
       render 'user_index'
     end
 
@@ -60,6 +60,6 @@ class QuizzesController < ApplicationController
   end
 
   def quiz_params
-    params.require(:quiz).permit(:title, :description, :total_questions, :active, :category)
+    params.require(:quiz).permit(:title, :description, :total_questions, :active, :category, :status)
   end
 end
