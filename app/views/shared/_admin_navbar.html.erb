@@ -1,0 +1,42 @@
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <%= link_to 'Mementos', root_path , class:'btn btn-ghost text-xl' %>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      <% if user_signed_in? %>
+        <li>
+          <%= link_to 'User', user_path(current_user) , class:'block px-4 py-2 text-sm text-gray-700'%>
+        </li>
+        <li>
+          <%= link_to 'New Quiz', new_quiz_path , class:'block px-4 py-2 text-sm text-gray-700'%>
+        </li>
+        <li>
+          <%= link_to 'All Quizes', quizzes_path, class:'block px-4 py-2 text-sm text-gray-700' %>
+        </li>
+        <li>
+          <%= link_to 'Create Question', new_question_path , class:'block px-4 py-2 text-sm text-gray-700'%>
+        </li>
+        <li>
+          <%= link_to 'All Questions', questions_path , class:'block px-4 py-2 text-sm text-gray-700'%>
+        </li>
+        <li>
+          <%= link_to "Sign out", destroy_user_session_path, class:'block px-4 py-2 text-sm text-gray-700', data:{turbo_method: :delete} %>
+        </li>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path , class:'block px-4 py-2 text-sm text-gray-700'%>
+        <% end %>
+      <li>
+        <details>
+          <summary>
+            Parent
+          </summary>
+          <ul class="p-2 bg-base-100 rounded-t-none">
+            <li> <%= link_to 'User', user_path(current_user) , class:'block px-4 py-2 text-sm text-gray-700' if user_signed_in? %></li>
+            <li><a>Link 2</a></li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </div>
+</div>
