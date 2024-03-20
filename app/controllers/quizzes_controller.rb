@@ -25,6 +25,8 @@ class QuizzesController < ApplicationController
   end
 
   def update
+    @quiz.update(quiz_params)
+    redirect_to @quiz, notice: 'Quiz was successfully updated.'
   end
 
   def destroy
