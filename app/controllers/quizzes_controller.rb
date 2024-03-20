@@ -13,6 +13,7 @@ class QuizzesController < ApplicationController
   end
 
   def show
+    authorize @quiz
   end
 
   def new
