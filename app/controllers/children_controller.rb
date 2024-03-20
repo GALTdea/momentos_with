@@ -1,9 +1,9 @@
 class ChildrenController < ApplicationController
   before_action :set_child, only: %i[ show edit update destroy ]
 
-  # GET /children or /children.json
+  after_action :verify_authorized, except: :index
   def index
-    @children = Child.all
+    @children = policy_scope(Child)
   end
 
   # GET /children/1 or /children/1.json
