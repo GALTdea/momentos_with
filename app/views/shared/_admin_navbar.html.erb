@@ -23,9 +23,9 @@
         <li>
           <%= link_to "Sign out", destroy_user_session_path, class:'block px-4 py-2 text-sm text-gray-700', data:{turbo_method: :delete} %>
         </li>
-        <% else %>
+      <% else %>
           <%= link_to 'Sign in', new_user_session_path , class:'block px-4 py-2 text-sm text-gray-700'%>
-        <% end %>
+      <% end %>
       <li>
         <details>
           <summary>
