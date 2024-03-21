@@ -1,0 +1,9 @@
+<div class="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+  <div class="mb-10">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-1"><%= @quiz.title %></h1>
+    <p class="text-lg text-gray-500"><%= @quiz.description %></p>
+  </div> 
+  <div> 
+    <%= link_to 'Start Quiz', new_quiz_quiz_session_path(quiz_id: @quiz.id) %>
+  </div> 
+</div>
