@@ -31,9 +31,11 @@ class ChildrenController < ApplicationController
         @child.entries.create!(user_id: current_user.id, prompt_id: "1", response: "I played outside and made a new friend.", conversation_date: Date.today, notes: "He was very excited about his new friend.")
         format.html { redirect_to child_url(@child), notice: "Child was successfully created." }
         format.json { render :show, status: :created, location: @child }
+        # format.turbo_stream {  } # Update necessary parts of the page
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @child.errors, status: :unprocessable_entity }
+        # format.turbo_stream {  } # Handle errors, maybe update the form to display them
       end
     end
   end
