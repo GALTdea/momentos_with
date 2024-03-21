@@ -10,6 +10,7 @@ class ChildrenController < ApplicationController
   def show
     # @entry_to_complete = @child.entries.where(user_id: current_user.id).where(response: nil).first
     @entry_to_complete = @child.entries.first
+    authorize @child
   end
 
   # GET /children/new
