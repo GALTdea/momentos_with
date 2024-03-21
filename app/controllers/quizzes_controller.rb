@@ -14,6 +14,12 @@ class QuizzesController < ApplicationController
 
   def show
     authorize @quiz
+
+    if current_user && current_user.admin?
+      render 'show'
+    else
+      render 'user_show'
+    end
   end
 
   def new
