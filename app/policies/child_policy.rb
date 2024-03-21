@@ -2,6 +2,10 @@ class ChildPolicy < ApplicationPolicy
   def index?
     user.admin?
   end
+
+  def show?
+    user.admin? || record.user == user
+  end
   class Scope < Scope
     def resolve
       if user.admin?
