@@ -8,6 +8,10 @@ class QuizPolicy < ApplicationPolicy
     true
   end
 
+  def new?
+    user.admin?
+  end
+
   class Scope < Scope
     def resolve
       if user.admin?
