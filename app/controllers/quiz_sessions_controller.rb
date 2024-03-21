@@ -1,6 +1,7 @@
 class QuizSessionsController < ApplicationController
   before_action :set_quiz, only: [:new, :create]
   before_action :set_quiz_session, only: [:show, :update]
+  before_action :authenticate_user!
 
   def new
     @quiz = Quiz.last
