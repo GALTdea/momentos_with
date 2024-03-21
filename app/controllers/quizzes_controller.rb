@@ -18,6 +18,7 @@ class QuizzesController < ApplicationController
 
   def new
     @quiz = Quiz.new
+    authorize @quiz
   end
 
   def create
