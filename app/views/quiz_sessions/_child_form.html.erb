@@ -1,0 +1,5 @@
+<%= form_with model: Child.new, id: "new_child_form", local: true do |form| %>
+  <%= form.label :name, 'Child Name' %>
+  <%= form.text_field :name %>
+  <%= form.submit "Create Child" %>
+<% end %>
