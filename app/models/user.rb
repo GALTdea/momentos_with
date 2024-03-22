@@ -5,5 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :children
 
+  accepts_nested_attributes_for :children, allow_destroy: true
+
   enum role: [:user, :admin]
 end
