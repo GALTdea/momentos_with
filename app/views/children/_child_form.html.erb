@@ -1,0 +1,10 @@
+<%#= turbo_frame_tag "new_child_frame" do %>
+<%#= form_with model: Child.new, id: "new_child_form", target: "new_child_frame" do |form| %>
+<%= form_with model: Child.new, url: children_path, id: "new_child_form", target: "new_child_frame" do |form| %>
+
+  <%= form_with model: Child.new, id: "new_child_form", target: "new_child_frame" do |form| %>
+    <%= form.label :name, 'Child Name' %>
+    <%= form.text_field :name %>
+    <%= form.submit "Create Child" %>
+  <% end %>
+<% end %>
