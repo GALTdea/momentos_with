@@ -1,0 +1,6 @@
+# app/views/children/create.turbo_stream.erb
+<%= turbo_stream.replace "children_dropdown" do %>
+  <%= form_with model: [ @quiz, @quiz.quiz_sessions.build ], local: true do |form| %>
+    <%= form.collection_select :child_id, current_user.children, :id, :name, prompt: 'Select Child' %>
+  <% end %>
+<% end %>
