@@ -26,19 +26,28 @@ class ChildrenController < ApplicationController
   def create
     @child = Child.new(child_params)
     @child.user_id = current_user.id
+
     respond_to do |format|
       if @child.save
         @child.entries.create!(user_id: current_user.id, prompt_id: "1", response: "I played outside and made a new friend.", conversation_date: Date.today, notes: "He was very excited about his new friend.")
+
         format.html { redirect_to child_url(@child), notice: "Child was successfully created." }
         format.json { render :show, status: :created, location: @child }
-        # format.turbo_stream {  } # Update necessary parts of the page
+
+        # Update the quiz session form part of the page
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("quiz_session_form",
+            partial: "quiz_sessions/form",
+            locals: { quiz: Quiz.find(params[:quiz_id]), current_user: current_user })
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @child.errors, status: :unprocessable_entity }
-        # format.turbo_stream {  } # Handle errors, maybe update the form to display them
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_child_frame", partial: "children/form", locals: { child: @child }) }
       end
     end
   end
+
 
   # PATCH/PUT /children/1 or /children/1.json
   def update
