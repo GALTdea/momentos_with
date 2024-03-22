@@ -6,6 +6,7 @@ class QuizSessionsController < ApplicationController
   def new
     @quiz = Quiz.last
     @quiz_session = QuizSession.new
+    @has_children = current_user.children.exists?
   end
 
   def create
@@ -18,7 +19,6 @@ class QuizSessionsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
 
   def show
   end
@@ -68,6 +68,6 @@ private
   end
 
   def quiz_session_params
-    params.require(:quiz_session).permit(:child_id,:quiz_id )
+    params.require(:quiz_session).permit(:child_id,:quiz_id)
   end
 end
