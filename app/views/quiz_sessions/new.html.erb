@@ -1,10 +1,9 @@
 <div>
   <h1 class="font-bold text-4xl">QuizSessions#new</h1>
-  <p>Find me in app/views/quiz_sessions/new.html.erb</p>
 </div>
 
-
-<%= form_with model: [ @quiz, @quiz.quiz_sessions.build ], local: true do |form| %>
-  <%= form.collection_select :child_id, current_user.children, :id, :name, prompt: 'Select Child' %>
-  <%= form.submit "Start Quiz" %>
+<% if @has_children %>
+  <%= render 'quiz_session_form' %>
+<% else %>
+  <%= render 'child_form' %>
 <% end %>
