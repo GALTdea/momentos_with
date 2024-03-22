@@ -3,6 +3,8 @@ class QuizSession < ApplicationRecord
   belongs_to :quiz
   has_many :answers
 
+  accepts_nested_attributes_for :child
+
 
   def next_question
     # Simple example: Get the next question by sequence that hasn't been answered yet
