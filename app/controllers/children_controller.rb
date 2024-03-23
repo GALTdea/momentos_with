@@ -20,6 +20,7 @@ class ChildrenController < ApplicationController
 
   # GET /children/1/edit
   def edit
+    authorize @child
   end
 
   # POST /children or /children.json
