@@ -1,5 +1,7 @@
-<%= form_with model: Child.new, id: "new_child_form", local: true do |form| %>
+<%= form_with model: Child.new, id: "new_child_form", local: true, data: { turbo_frame: "target_dom_id" } do |form| %>
   <%= form.label :name, 'Child Name' %>
   <%= form.text_field :name %>
+  <%= form.hidden_field :quiz_id, value: @quiz.id %>
+  <%= form.hidden_field :from_quiz_session, value: true %>
   <%= form.submit "Create Child" %>
 <% end %>

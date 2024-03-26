@@ -28,15 +28,12 @@ class ChildrenController < ApplicationController
 
     respond_to do |format|
       if @child.save
-        format.html { redirect_to child_url(@child), notice: "Child was successfully created." }
-        format.json { render :show, status: :created, location: @child }
-
-        # Update the quiz session form part of the page
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("quiz_session_form",
-            partial: "quiz_sessions/form",
-            locals: { quiz: Quiz.find(params[:quiz_id]), current_user: current_user })
+        quiz_session = @child.quiz_sessions.last
+        if params[:from_quiz_session].present? && params[:quiz_id].present?
+          format.html { redirect_to quiz_session_path(quiz_session), notice: "Child was successfully created from the block." }
         end
+        format.html { redirect_to quiz_session_path(@child.quiz_sessions.last), notice: "Child was successfully created." }
+        format.json { render :show, status: :created, location: @child }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @child.errors, status: :unprocessable_entity }
@@ -77,6 +74,6 @@ class ChildrenController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def child_params
-      params.require(:child).permit(:name, :description, :user_id, :birthdate, :gender, :profile)
+      params.require(:child).permit(:name, :description, :user_id, :birthdate, :gender, :profile, :quiz_id, :from_quiz_session)
     end
 end
