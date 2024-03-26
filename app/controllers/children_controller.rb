@@ -1,7 +1,6 @@
 class ChildrenController < ApplicationController
   before_action :set_child, only: %i[ show edit update destroy ]
 
-  after_action :verify_authorized, except: :index
   def index
     @children = policy_scope(Child)
   end
