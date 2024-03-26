@@ -28,8 +28,11 @@ class ChildrenController < ApplicationController
     respond_to do |format|
       if @child.save
         quiz_session = @child.quiz_sessions.last
-        if params[:from_quiz_session].present? && params[:quiz_id].present?
-          format.html { redirect_to quiz_session_path(quiz_session), notice: "Child was successfully created from the block." }
+        if params[:child][:from_quiz_session].present? && params[:child][:quiz_id].present?
+          format.html {
+            redirect_to start_quiz_session_path(quiz_session),
+            notice: "Child was successfully created from the block."
+          }
         end
         format.html { redirect_to quiz_session_path(@child.quiz_sessions.last), notice: "Child was successfully created." }
         format.json { render :show, status: :created, location: @child }
