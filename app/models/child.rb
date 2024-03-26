@@ -9,8 +9,5 @@ class Child < ApplicationRecord
 
   def create_quiz_session
     QuizSession.create(child_id: self.id, quiz_id: self.quiz_id) if self.quiz_id.present?
-
-    # Assuming you have a quiz_id attribute in your Child model or some way to obtain it
-    # self.create_quiz_session(quiz_id: self.quiz_id) if self.quiz_id.present?
   end
 end
