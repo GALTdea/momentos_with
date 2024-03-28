@@ -24,10 +24,8 @@
                 <% end %>
               </div>
             </fieldset>
-
             <%= form.hidden_field :question_id, value: @question.id %>
             <%= form.hidden_field :quiz_session_id, value: @quiz_session.id if @quiz_session  %>
-
             <%= form.submit "Submit", class: "btn btn-primary mt-4" %>
           <% end %>
         </div>
