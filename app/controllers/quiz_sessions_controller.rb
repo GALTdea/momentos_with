@@ -29,9 +29,12 @@ class QuizSessionsController < ApplicationController
   def start
     @quiz_session = QuizSession.find(params[:id])
     last_question_id = @quiz_session.answers.last&.question_id
+    quiz = @quiz_session.quiz
 
     if last_question_id
-      next_question = find_next_question(Question.find(last_question_id))
+      current_question = quiz.questions.find(last_question_id)
+      next_question = find_next_question(quiz, current_question)
+      # next_question = find_next_question(Question.find(last_question_id))
     else
       next_question = @quiz_session.quiz.questions.first
     end
@@ -47,17 +50,12 @@ class QuizSessionsController < ApplicationController
     end
   end
 
-
-
 private
-
-  def find_next_question(current_question)
-    quiz = current_question.quiz
+  def find_next_question(quiz, current_question)
     questions = quiz.questions.order(:id).to_a
     current_index = questions.index(current_question)
-    questions[current_index + 1]
+    questions[current_index + 1] # This will return nil if current_question is the last one, which is handled in your start action.
   end
-
 
   def set_quiz
     @quiz = Quiz.find(params[:quiz_id])
