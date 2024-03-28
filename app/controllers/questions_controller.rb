@@ -56,10 +56,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
-  # def question_params
-  #   params.require(:question).permit(:text, :quiz_id, :_destroy, answers_attributes: [:id, :text, :correct, :_destroy])
-  # end
   def question_params
     params.require(:question).permit(:text, :question_type, :options, :category, :sequence_number, :active, :quiz_id)
   end
